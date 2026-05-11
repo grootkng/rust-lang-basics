@@ -276,3 +276,56 @@ enum IpAddrKind {
 
 let home = IpAddrKind::V4(127, 0, 0, 1);
 ```
+
+## Error handling
+
+There's two ways to approach error handling in Rust.
+
+The first one is with `Option<T>`:
+```rust
+enum Option<T> { // Define the generic Option type
+    Some(T), // Represents a value
+    None,    // Represents NO value
+};
+```
+
+It can be use like:
+```rust
+fn divide(numerator: f64, denominator: f64) -> Option<f64> {
+    if denominator == 0.0 {
+        None
+    } else {
+        Some(numerator / denominator)
+    }
+}
+
+let result = divide(10.0, 0.0);
+match result {
+    Some(x) => println!("Result: {}", x),
+    None => println!("Cannot divide by Zero"),
+}
+```
+
+And the second approach with `Result<T, E>`:
+```rust
+enum Result<T, E> { // Define the generic Result type
+    Ok(T),  // Represents a value
+    Err(E), // Represents an error
+};
+```
+
+And it can be used as:
+```rust
+fn divide(numerator: f64, denominator: f64) -> Result<f64, String> {
+    if denominator == 0.0 {
+        Err("Cannot divide by Zero".to_string())
+    } else {
+        Ok(numerator / denominator)
+    }
+}
+
+match divide(10.0, 2.0) {
+    Ok(result) => println!("Result: {}", result),
+    Err(err) => println!("Error: {}", err),
+}
+```
