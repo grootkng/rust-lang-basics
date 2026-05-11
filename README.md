@@ -5,6 +5,14 @@ This document explains fundamental concepts demonstrated in the repository, usin
 ## Primitive Data Types
 
 Primitive data types are basic data types that do not have associated methods or complex structure.
+ * Rust has signed (+ and -) and unsigned intger (only +) types of different sizes.
+    * signed integers: i8, i16, i32, i64, i128
+    * unsigned integers: u8, u16, u32, u64, u128
+ * Floats (Floating Point Types)
+    * f32, f64 
+ * Boolean
+    * true / false 
+ * Character Type / Char
 
 Example using `i32` and `f64`:
 ```rust
@@ -18,12 +26,41 @@ fn main() {
 
 Compound data types are structures used to group related data.
 
-Example using a Struct:
+Example using array:
 ```rust
-struct BankAccount {
-    owner: String,
-    balance: f64,
-}
+let nums: [i32; 5] = [1, 2, 3, 4, 5];
+println!("Number Array: {:?}", nums);
+
+let fruits: [&str; 3] = ["Apple", "Banana", "Orange"];
+println!("Fruit's Array: {:?}", fruits);
+```
+
+Example using tuples:
+```rust
+let human: (String, i32, bool) = ("Alice".to_string(), 30, false);
+println!("Human: {:?}", human);
+
+let mix = ("Kratos", 23, true, [1, 2, 3, 4, 5]);
+println!("Mix: {:?}", mix);
+```
+
+Example using slices:
+```rust
+let animals: &[&str] = &["Lion", "Elephant", "Crocodile"];
+println!("Slice of animals: {:?}", animals);
+```
+
+Example using strings:
+```rust
+let mut stone_cold: String = String::from("Hell, ");
+stone_cold.push_str("Yeah!");
+println!("Stone cold says: {}", stone_cold);
+
+let str: String = String::from("Hello, World");
+let slice: &str = &str;
+let slice_length: &str = &str[0..5];
+println!("Slice: {}", slice);
+println!("Slice length: {}", slice_length);
 ```
 
 ## Functions
@@ -73,7 +110,7 @@ let mut account = BankAccount {
 Needs to have its type explicity defined. Can also be used in global context.
 
 ```rust
- const PI: f32 = 3.1415;
+const PI: f32 = 3.1415;
 
 fn main() {
     constants();
