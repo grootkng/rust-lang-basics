@@ -8,8 +8,10 @@ fn main() {
     let age: i16 = 18;
     if age >= 18 {
         println!("You can drive a car");
+    } else if age <= 21 {
+        println!("You can't have a gun");
     } else {
-        println!("You can not drive a car");
+        println!("You can not drive a car and a gun");
     }
 
     let condition = true;
