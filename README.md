@@ -15,6 +15,7 @@
 11. [Structs](#structs)
 12. [Enums](#enums)
 13. [Error handling](#error-handling)
+13. [Collection types](#collection-types)
 
 ---
 
@@ -189,4 +190,74 @@ match divide(10.0, 2.0) {
     Ok(res) => println!("{res}"),
     Err(e) => println!("{e}"),
 }
+```
+
+## Collection Types
+
+### Vectors
+
+Store values of same type in continued memory. Dynamic.
+
+```rust
+// Initialization and mutability
+let mut v = vec![1, 2, 3];
+v.push(4);
+
+// Access by index (can cause panic if out of band)
+let second = &v[1]; 
+
+// Acces with .get() (safe, returns Option)
+match v.get(1) {
+    Some(val) => println!("Valor: {val}"),
+    None => println!("Índice inexistente"),
+}
+
+// Loop
+for x in &v {
+    println!("{x}");
+}
+
+```
+
+### UTF-8 Strings
+
+Grow dinamically. Collection of interpreted bytes as UTF-80 characteres.
+
+```rust
+let mut s = String::from("foo");
+s.push_str("bar"); // Adiciona slice
+s.push('!');       // Adiciona char
+
+// Eficient concat
+let s1 = String::from("Hello, ");
+let s2 = String::from("world!");
+let s3 = s1 + &s2; // s1 has been moved here and can no longer be used
+
+// Format (don't move the variables)
+let full = format!("{s3} Welcome");
+
+```
+
+### Hash Maps
+
+Store key-value pairs. Handful for searching identifiers.
+
+```rust
+use std::collections::HashMap;
+
+let mut scores = HashMap::new();
+scores.insert(String::from("Blue"), 10);
+scores.insert(String::from("Yellow"), 50);
+
+// Safe access with fallback
+let team = String::from("Blue");
+let score = scores.get(&team).copied().unwrap_or(0);
+
+// Conditional insertion (insert only if not exists)
+scores.entry(String::from("Red")).or_insert(30);
+
+for (key, value) in &scores {
+    println!("{key}: {value}");
+}
+
 ```
